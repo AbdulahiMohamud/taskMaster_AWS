@@ -1,7 +1,7 @@
 package com.abdul.taskmaster.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.room.Room;
+
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,32 +13,22 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.abdul.taskmaster.R;
-import com.abdul.taskmaster.database.TaskMasterDatabase;
 import com.abdul.taskmaster.model.StateEnum;
 import com.abdul.taskmaster.model.TaskModel;
 
 import java.util.Date;
 
 public class AddTask extends AppCompatActivity {
-    TaskMasterDatabase taskMasterDatabase;
+
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_tasks);
-        //database
-        taskMasterDatabase = Room.databaseBuilder(
-                        getApplicationContext(),//  so that we only have a single database across the whole app
-                        TaskMasterDatabase.class,
-                        "abdulahi_task_master")
-                .allowMainThreadQueries()// Don't do this in a real app!
-                .fallbackToDestructiveMigration()// If Room gets confused, it tosses your database; don't use this in production!
-                .build();
-
 
         setUpSpinner();
-        setUpAddButton(taskMasterDatabase);
+        setUpAddButton();
 
 
     }
@@ -56,7 +46,7 @@ public class AddTask extends AppCompatActivity {
 
     }
 
-    private void setUpAddButton(TaskMasterDatabase database){
+    private void setUpAddButton(){
         Spinner statusSpinner = findViewById(R.id.taskStateSpinner);
         Button addTask = findViewById(R.id.addTaskOnAddTaskPageButton);
         addTask.setOnClickListener(new View.OnClickListener() {
@@ -72,9 +62,9 @@ public class AddTask extends AppCompatActivity {
                         StateEnum.fromString(statusSpinner.getSelectedItem().toString())
 
                 );
-                database.taskDao().insert(newTask);
-                Intent goHome = new Intent(AddTask.this,MainActivity.class);
-                startActivity(goHome);
+//                database.taskDao().insert(newTask);
+//                Intent goHome = new Intent(AddTask.this,MainActivity.class);
+//                startActivity(goHome);
             }
         });
     }

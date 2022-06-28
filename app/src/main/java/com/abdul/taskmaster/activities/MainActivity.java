@@ -3,7 +3,7 @@ package com.abdul.taskmaster.activities;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.room.Room;
+
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -15,7 +15,6 @@ import android.widget.TextView;
 
 import com.abdul.taskmaster.R;
 import com.abdul.taskmaster.adapter.TaskRecyclerViewAdapter;
-import com.abdul.taskmaster.database.TaskMasterDatabase;
 import com.abdul.taskmaster.model.TaskModel;
 
 import java.util.ArrayList;
@@ -28,10 +27,10 @@ public class MainActivity extends AppCompatActivity {
     public static final String TASK_CREATION = "task date";
 
     SharedPreferences preferences;
-    TaskMasterDatabase taskMasterDatabase;
+
 
     TaskRecyclerViewAdapter adapter;
-    List<TaskModel> taskModelList = null;
+    List<TaskModel> taskModelList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,15 +46,7 @@ public class MainActivity extends AppCompatActivity {
         goToUSerSettingBtn();
 
         //database
-        taskMasterDatabase = Room.databaseBuilder(
-                getApplicationContext(),
-                TaskMasterDatabase.class,
-                "abdulahi_task_master")
-                .allowMainThreadQueries()
-                .fallbackToDestructiveMigration()
-                .build();
 
-        taskModelList = taskMasterDatabase.taskDao().findAll();
 
 
 
@@ -80,8 +71,7 @@ public class MainActivity extends AppCompatActivity {
         updateUsername();
 
         // updating the recyclerview by clearing the lists and readding them from the database
-        taskModelList.clear();
-        taskModelList.addAll(taskMasterDatabase.taskDao().findAll());
+
         adapter.notifyDataSetChanged();
 
 
@@ -182,13 +172,13 @@ public class MainActivity extends AppCompatActivity {
 
 
         // create the data using the model
-//        List<TaskModel> tasks = new ArrayList<>();
+
         // make the data
 
-//        tasks.add(new TaskModel("GYM"));
-//        tasks.add(new TaskModel("CLEANING"));
-//        tasks.add(new TaskModel("STUDYING"));
-//        tasks.add(new TaskModel("TAXES"));
+        taskModelList.add(new TaskModel("GYM"));
+        taskModelList.add(new TaskModel("CLEANING"));
+        taskModelList.add(new TaskModel("STUDYING"));
+        taskModelList.add(new TaskModel("TAXES"));
 
         //give  context to are adapter to reroute when Recycler view is clicked
 

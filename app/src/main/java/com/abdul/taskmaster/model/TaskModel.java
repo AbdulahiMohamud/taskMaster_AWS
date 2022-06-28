@@ -1,15 +1,13 @@
 package com.abdul.taskmaster.model;
 
 
-import androidx.room.Entity;
-import androidx.room.PrimaryKey;
 
 import java.util.Date;
 
-@Entity
+
 public class TaskModel {
 
-    @PrimaryKey(autoGenerate = true)
+
     private Long id;
     private String name;
     private String description;
@@ -24,7 +22,9 @@ public class TaskModel {
         this.state = state;
     }
 
-
+    public TaskModel(String name) {
+        this.name = name;
+    }
 
     public String getName() {
         return name;
