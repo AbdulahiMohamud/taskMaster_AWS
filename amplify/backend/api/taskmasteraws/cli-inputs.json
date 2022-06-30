@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "serviceConfiguration": {
+    "apiName": "taskmasteraws",
+    "serviceName": "AppSync",
+    "gqlSchemaPath": "/Users/ballout/401/taskMaster_AWS/amplify/backend/api/taskmasteraws/schema.graphql",
+    "defaultAuthType": {
+      "mode": "API_KEY",
+      "expirationTime": 10,
+      "apiKeyExpirationDate": "2022-07-09T22:44:22.303Z",
+      "keyDescription": "AKIA3TDEYR5KJN2JKEFN"
+    },
+    "conflictResolution": {},
+    "additionalAuthTypes": []
+  }
+}
