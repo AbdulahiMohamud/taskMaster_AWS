@@ -28,3 +28,9 @@
 ![Recyclerviewlist](screenshots/newhome.png)
 ![Task Details](screenshots/detail.png)
 ![Status Bar](screenshots/status.png)
+
+# Lab 32
+
+![Recyclerviewlist](screenshots/newhome.png)
+![Task Details](screenshots/detail.png)
+![Status Bar](screenshots/status.png)
