@@ -9,13 +9,17 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.abdul.taskmaster.R;
 import com.abdul.taskmaster.adapter.TaskRecyclerViewAdapter;
-import com.abdul.taskmaster.model.TaskModel;
+import com.amplifyframework.api.graphql.model.ModelQuery;
+import com.amplifyframework.core.Amplify;
+import com.amplifyframework.core.model.Model;
+import com.amplifyframework.datastore.generated.model.TaskModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
     public static final String TASK_DESCRIPTION = "task description";
     public static final String TASK_STATUS = "task status";
     public static final String TASK_CREATION = "task date";
+    public static final String TAG = "MainActivity";
 
     SharedPreferences preferences;
 
@@ -70,9 +75,10 @@ public class MainActivity extends AppCompatActivity {
 
         updateUsername();
 
+        setUpFromDB();
+
         // updating the recyclerview by clearing the lists and readding them from the database
 
-        adapter.notifyDataSetChanged();
 
 
     }
@@ -175,10 +181,6 @@ public class MainActivity extends AppCompatActivity {
 
         // make the data
 
-        taskModelList.add(new TaskModel("GYM"));
-        taskModelList.add(new TaskModel("CLEANING"));
-        taskModelList.add(new TaskModel("STUDYING"));
-        taskModelList.add(new TaskModel("TAXES"));
 
         //give  context to are adapter to reroute when Recycler view is clicked
 
@@ -188,6 +190,26 @@ public class MainActivity extends AppCompatActivity {
         taskRecyclerView.setAdapter(adapter);
 
 
+    }
+
+
+    public void setUpFromDB(){
+        Amplify.API.query(
+                ModelQuery.list(TaskModel.class),
+                success -> {
+                    Log.i(TAG,"Task successFully created");
+                    taskModelList.clear();
+                    for (TaskModel databaseTask : success.getData()) {
+                        taskModelList.add(databaseTask);
+                    }
+                    runOnUiThread(() ->{
+                        adapter.notifyDataSetChanged();
+                    });
+                },
+                fail -> Log.e(TAG,"Failed to Create Task")
+        );
+
+        setUpTaskRecyclerView();
     }
 
 

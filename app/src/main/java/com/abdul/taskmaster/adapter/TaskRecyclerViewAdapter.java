@@ -1,10 +1,8 @@
 package com.abdul.taskmaster.adapter;
 
-import android.content.Context;
-import android.content.Intent;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
+import android.content.*;
+import android.view.*;
+
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -13,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.abdul.taskmaster.R;
 import com.abdul.taskmaster.activities.MainActivity;
 import com.abdul.taskmaster.activities.TaskDetails;
-import com.abdul.taskmaster.model.TaskModel;
+import com.amplifyframework.datastore.generated.model.TaskModel;
 
 import java.util.List;
 
@@ -47,7 +45,7 @@ public class TaskRecyclerViewAdapter extends RecyclerView.Adapter<TaskRecyclerVi
         // position is the index of when the data lies in the recycler List and is given.
         TaskModel taskList = tasks.get(position);
         // set the fragment text view to  the task name
-        taskFragmentTextView.setText((position + 1) +" :"+ taskList.getName() + "\n" + taskList.getDateCreated()+
+        taskFragmentTextView.setText((position + 1) +" :"+ taskList.getName() + "\n" + taskList.getCreatedAt()+
                 "\n" + taskList.getState());
 
         // bind the onclick listener
@@ -56,8 +54,8 @@ public class TaskRecyclerViewAdapter extends RecyclerView.Adapter<TaskRecyclerVi
             Intent goToTaskDetails = new Intent(callingActivity, TaskDetails.class);
             goToTaskDetails.putExtra(MainActivity.TASK_TITLE,taskList.getName());
             goToTaskDetails.putExtra(MainActivity.TASK_DESCRIPTION,taskList.getDescription());
-            goToTaskDetails.putExtra(MainActivity.TASK_STATUS,taskList.getState());
-            goToTaskDetails.putExtra(MainActivity.TASK_CREATION,taskList.getDateCreated());
+            goToTaskDetails.putExtra(MainActivity.TASK_STATUS,taskList.getState().toString());
+
             callingActivity.startActivity(goToTaskDetails);
         });
 
