@@ -9,6 +9,16 @@ mutation CreateTaskModel(
     description
     dateCreated
     state
+    teamId
+    team {
+      id
+      teamName
+      task {
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
     createdAt
     updatedAt
   }
@@ -23,6 +33,16 @@ mutation UpdateTaskModel(
     description
     dateCreated
     state
+    teamId
+    team {
+      id
+      teamName
+      task {
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
     createdAt
     updatedAt
   }
@@ -37,6 +57,88 @@ mutation DeleteTaskModel(
     description
     dateCreated
     state
+    teamId
+    team {
+      id
+      teamName
+      task {
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+    createdAt
+    updatedAt
+  }
+}
+mutation CreateTeam(
+  $input: CreateTeamInput!
+  $condition: ModelTeamConditionInput
+) {
+  createTeam(input: $input, condition: $condition) {
+    id
+    teamName
+    task {
+      items {
+        id
+        name
+        description
+        dateCreated
+        state
+        teamId
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+    createdAt
+    updatedAt
+  }
+}
+mutation UpdateTeam(
+  $input: UpdateTeamInput!
+  $condition: ModelTeamConditionInput
+) {
+  updateTeam(input: $input, condition: $condition) {
+    id
+    teamName
+    task {
+      items {
+        id
+        name
+        description
+        dateCreated
+        state
+        teamId
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+    createdAt
+    updatedAt
+  }
+}
+mutation DeleteTeam(
+  $input: DeleteTeamInput!
+  $condition: ModelTeamConditionInput
+) {
+  deleteTeam(input: $input, condition: $condition) {
+    id
+    teamName
+    task {
+      items {
+        id
+        name
+        description
+        dateCreated
+        state
+        teamId
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
     createdAt
     updatedAt
   }
