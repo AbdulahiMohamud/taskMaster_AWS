@@ -34,3 +34,11 @@
 ![Recyclerviewlist](screenshots/newhome.png)
 ![Task Details](screenshots/detail.png)
 ![Status Bar](screenshots/status.png)
+
+# Lab 33
+
+![Recyclerviewlist](screenshots/teamtask.png)
+![Task Details](screenshots/deletebtn.png)
+![team Bar](screenshots/addteam.png)
+![team setting Bar](screenshots/teamsetting.png)
+

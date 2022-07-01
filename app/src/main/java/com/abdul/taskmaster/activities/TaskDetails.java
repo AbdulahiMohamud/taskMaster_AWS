@@ -4,9 +4,16 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
+import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.abdul.taskmaster.R;
+import com.amplifyframework.api.graphql.model.ModelMutation;
+import com.amplifyframework.api.graphql.model.ModelQuery;
+import com.amplifyframework.core.Amplify;
+import com.amplifyframework.datastore.generated.model.TaskModel;
 
 public class TaskDetails extends AppCompatActivity {
 
@@ -19,6 +26,7 @@ public class TaskDetails extends AppCompatActivity {
         setUpTaskDate();
         setUpTaskDescription();
         setUpTaskStatus();
+        setUpdelete();
     }
 
     private void setUpTaskTitle(){
@@ -94,6 +102,34 @@ public class TaskDetails extends AppCompatActivity {
         }
 
 
+    }
+
+    private void setUpdelete(){
+        Intent callingIntent = getIntent();
+        Button deleteBtn = findViewById(R.id.deleteButton);
+        String taskId = null;
+        if(callingIntent != null){
+            taskId = callingIntent.getStringExtra(MainActivity.TASK_ID);
+        }
+        String finalTaskId = taskId;
+        deleteBtn.setOnClickListener(v -> {
+            Amplify.API.query(
+                    ModelQuery.get(TaskModel.class, finalTaskId),
+                    res -> {
+                        Log.i("TaskDetailsAvtivity","successfully got task");
+                        Amplify.API.mutate(
+                                ModelMutation.delete(res.getData()),
+                                success -> Log.i("TaskDetailsAvtivity","successfully deleted task"),
+                                fail -> Log.e("TaskDetailsAvtivity","failed deleted task")
+
+                        );
+                    },
+                    fail -> Log.e("TaskDetailsAvtivity","failed deleted task")
+            );
+            Toast.makeText(TaskDetails.this,"Task Deleted",Toast.LENGTH_SHORT).show();
+
+            finish();
+        });
     }
 
 

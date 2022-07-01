@@ -24,7 +24,7 @@
         android:layout_height="150dp"
         android:layout_marginStart="32dp"
         android:layout_marginEnd="30dp"
-        android:layout_marginBottom="264dp"
+        android:layout_marginBottom="360dp"
         android:text="Lorem ipsum."
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -51,4 +51,14 @@
         android:text="Date"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/deleteButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="246dp"
+        android:layout_marginTop="46dp"
+        android:text="Delete"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tasksDescripOnDetails" />
 </androidx.constraintlayout.widget.ConstraintLayout>

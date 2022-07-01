@@ -6,6 +6,16 @@ subscription OnCreateTaskModel {
     description
     dateCreated
     state
+    teamId
+    team {
+      id
+      teamName
+      task {
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
     createdAt
     updatedAt
   }
@@ -17,6 +27,16 @@ subscription OnUpdateTaskModel {
     description
     dateCreated
     state
+    teamId
+    team {
+      id
+      teamName
+      task {
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
     createdAt
     updatedAt
   }
@@ -28,6 +48,79 @@ subscription OnDeleteTaskModel {
     description
     dateCreated
     state
+    teamId
+    team {
+      id
+      teamName
+      task {
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+    createdAt
+    updatedAt
+  }
+}
+subscription OnCreateTeam {
+  onCreateTeam {
+    id
+    teamName
+    task {
+      items {
+        id
+        name
+        description
+        dateCreated
+        state
+        teamId
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+    createdAt
+    updatedAt
+  }
+}
+subscription OnUpdateTeam {
+  onUpdateTeam {
+    id
+    teamName
+    task {
+      items {
+        id
+        name
+        description
+        dateCreated
+        state
+        teamId
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+    createdAt
+    updatedAt
+  }
+}
+subscription OnDeleteTeam {
+  onDeleteTeam {
+    id
+    teamName
+    task {
+      items {
+        id
+        name
+        description
+        dateCreated
+        state
+        teamId
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
     createdAt
     updatedAt
   }
