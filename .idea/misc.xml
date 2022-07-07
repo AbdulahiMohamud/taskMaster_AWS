@@ -5,10 +5,13 @@
       <map>
         <entry key="app/src/main/res/layout/activity_add_tasks.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_all_tasks.xml" value="0.4036458333333333" />
+        <entry key="app/src/main/res/layout/activity_login.xml" value="0.38958333333333334" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.33" />
         <entry key="app/src/main/res/layout/activity_main2.xml" value="0.4036458333333333" />
+        <entry key="app/src/main/res/layout/activity_signup.xml" value="0.4036458333333333" />
         <entry key="app/src/main/res/layout/activity_task_details.xml" value="0.4036458333333333" />
         <entry key="app/src/main/res/layout/activity_user_setting.xml" value="0.4036458333333333" />
+        <entry key="app/src/main/res/layout/activity_verify.xml" value="0.4036458333333333" />
         <entry key="app/src/main/res/layout/fragment_task_fragments.xml" value="0.37395833333333334" />
       </map>
     </option>
