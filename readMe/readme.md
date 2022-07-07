@@ -42,3 +42,10 @@
 ![team Bar](screenshots/addteam.png)
 ![team setting Bar](screenshots/teamsetting.png)
 
+# Lab 36
+
+![Recyclerviewlist](screenshots/logout.png)
+
+![Login](screenshots/login.png)
+![Signin](screenshots/signup.png)
+
