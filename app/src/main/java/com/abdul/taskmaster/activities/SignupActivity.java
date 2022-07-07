@@ -1,7 +1,6 @@
-package com.abdul.taskmaster;
+package com.abdul.taskmaster.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.browser.trusted.TokenStore;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,6 +9,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.abdul.taskmaster.R;
 import com.amplifyframework.auth.AuthUserAttributeKey;
 import com.amplifyframework.auth.options.AuthSignUpOptions;
 import com.amplifyframework.core.Amplify;
@@ -45,7 +45,7 @@ public class SignupActivity extends AppCompatActivity {
                             .build(),
                     success -> {
                         Log.i(TAG,"Signedup successfully :" + success);
-                        Intent goVerify = new Intent(SignupActivity.this,VerifyActivity.class);
+                        Intent goVerify = new Intent(SignupActivity.this, VerifyActivity.class);
                         goVerify.putExtra(TAG_SIGNUP_EMAIL,email);
                         startActivity(goVerify);
                     },

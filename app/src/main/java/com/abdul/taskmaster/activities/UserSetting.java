@@ -1,10 +1,19 @@
 package com.abdul.taskmaster.activities;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.provider.OpenableColumns;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -18,6 +27,8 @@ import com.amplifyframework.api.graphql.model.ModelQuery;
 import com.amplifyframework.core.Amplify;
 import com.amplifyframework.datastore.generated.model.Team;
 
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
@@ -37,16 +48,85 @@ public class UserSetting extends AppCompatActivity {
     CompletableFuture<List<Team>> teamFuture = new CompletableFuture<>();
     ArrayList<String> teamName = new ArrayList<>();
     ArrayList<Team> team = new ArrayList<>();
+    ActivityResultLauncher<Intent> activityResultLauncher;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_setting);
+
         saveAndSetUsernameandTeam();
         saveButton();
         setupTeam();
 
+        activityResultLauncher = getImagePickingActivityResultLauncher();
+        setUpAddimageBtn();
+
+    }
+    public void setUpAddimageBtn()
+    {
+        Button addImageBtn = findViewById(R.id.userImageButton);
+        addImageBtn.setOnClickListener(v -> {
+            launchImageSelectionIntent();
+        });
+    }
+
+    public void launchImageSelectionIntent()
+    {
+        Intent imageFilePickingIntent = new Intent(Intent.ACTION_GET_CONTENT);
+        imageFilePickingIntent.setType("*/*");
+        imageFilePickingIntent.putExtra(Intent.EXTRA_MIME_TYPES, new String[]{"image/png"});
+
+        activityResultLauncher.launch(imageFilePickingIntent);
+    }
+
+    public ActivityResultLauncher<Intent> getImagePickingActivityResultLauncher()
+    {
+        ActivityResultLauncher<Intent> imagePickingActivityResultLauncher =
+                registerForActivityResult(
+                        new ActivityResultContracts.StartActivityForResult(),
+                        new ActivityResultCallback<ActivityResult>() {
+                            @Override
+                            public void onActivityResult(ActivityResult result) {
+                                Uri pickedImageUri = result.getData().getData();
+                                try {
+                                    InputStream pickedImageInputstream = getContentResolver().openInputStream(pickedImageUri);
+                                    String pickedImageFileName = getFileNameFromUri(pickedImageUri);
+
+                                    Log.i(TAG, "Succeeded in getting input stream from a file on our phone");
+                                } catch (FileNotFoundException fnfe)
+                                {
+                                    Log.e(TAG, "Could not get file from phone: " + fnfe.getMessage(), fnfe);
+                                }
+                            }
+                        }
+                );
+        return imagePickingActivityResultLauncher;
+    }
+
+    // Taken from https://stackoverflow.com/a/25005243/16889809
+    @SuppressLint("Range")
+    public String getFileNameFromUri(Uri uri) {
+        String result = null;
+        if (uri.getScheme().equals("content")) {
+            Cursor cursor = getContentResolver().query(uri, null, null, null, null);
+            try {
+                if (cursor != null && cursor.moveToFirst()) {
+                    result = cursor.getString(cursor.getColumnIndex(OpenableColumns.DISPLAY_NAME));
+                }
+            } finally {
+                cursor.close();
+            }
+        }
+        if (result == null) {
+            result = uri.getPath();
+            int cut = result.lastIndexOf('/');
+            if (cut != -1) {
+                result = result.substring(cut + 1);
+            }
+        }
+        return result;
     }
 
 

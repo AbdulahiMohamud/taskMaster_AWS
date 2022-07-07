@@ -1,4 +1,4 @@
-package com.abdul.taskmaster;
+package com.abdul.taskmaster.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -9,7 +9,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.abdul.taskmaster.activities.MainActivity;
+import com.abdul.taskmaster.R;
 import com.amplifyframework.core.Amplify;
 
 public class LoginActivity extends AppCompatActivity {
@@ -75,7 +75,7 @@ public class LoginActivity extends AppCompatActivity {
         Button signUpBtn = findViewById(R.id.loginSignUpButton);
 
         signUpBtn.setOnClickListener(v -> {
-            Intent goSignup = new Intent(LoginActivity.this,SignupActivity.class);
+            Intent goSignup = new Intent(LoginActivity.this, SignupActivity.class);
 
             startActivity(goSignup);
         });

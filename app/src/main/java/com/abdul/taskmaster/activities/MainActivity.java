@@ -15,9 +15,7 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
-import com.abdul.taskmaster.LoginActivity;
 import com.abdul.taskmaster.R;
-import com.abdul.taskmaster.SignupActivity;
 import com.abdul.taskmaster.adapter.TaskRecyclerViewAdapter;
 import com.amplifyframework.api.graphql.model.ModelMutation;
 import com.amplifyframework.api.graphql.model.ModelQuery;
