@@ -1,4 +1,4 @@
-package com.abdul.taskmaster;
+package com.abdul.taskmaster.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.abdul.taskmaster.R;
 import com.amplifyframework.core.Amplify;
 
 public class VerifyActivity extends AppCompatActivity {
@@ -40,7 +41,7 @@ public class VerifyActivity extends AppCompatActivity {
                     verification,
                     success -> {
                         Log.i(TAG,"Verify successful " + success);
-                        Intent goLogin = new Intent(VerifyActivity.this,LoginActivity.class);
+                        Intent goLogin = new Intent(VerifyActivity.this, LoginActivity.class);
                         startActivity(goLogin);
                     },
                     fail -> {

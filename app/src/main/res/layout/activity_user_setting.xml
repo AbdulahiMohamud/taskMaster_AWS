@@ -4,22 +4,19 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.UserSetting">
+    tools:context=".activities.UserSetting"
+    tools:layout_editor_absoluteY="81dp">
 
     <EditText
         android:id="@+id/userNameInput"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="65dp"
-        android:layout_marginEnd="136dp"
-        android:layout_marginBottom="73dp"
+        android:layout_marginStart="33dp"
+        android:layout_marginBottom="33dp"
         android:ems="10"
         android:inputType="textPersonName"
-        app:layout_constraintBottom_toTopOf="@+id/saveUserNameButton"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintBottom_toTopOf="@+id/userImageButton"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView9"
         tools:text="Username" />
 
     <TextView
@@ -32,29 +29,36 @@
         android:text="Username"
         app:layout_constraintBottom_toTopOf="@+id/userNameInput"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
 
     <Button
         android:id="@+id/saveUserNameButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="207dp"
-        android:layout_marginTop="72dp"
-        android:layout_marginEnd="116dp"
-        android:layout_marginBottom="420dp"
+        android:layout_marginStart="55dp"
+        android:layout_marginBottom="178dp"
         android:text="Save"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/userNameInput" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Spinner
         android:id="@+id/settingsTeamAddspinner"
         android:layout_width="409dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="61dp"
+        android:layout_marginTop="164dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/userNameInput" />
+
+    <Button
+        android:id="@+id/userImageButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="41dp"
+        android:layout_marginBottom="83dp"
+        android:text="Add Image"
+        app:layout_constraintBottom_toTopOf="@+id/settingsTeamAddspinner"
+        app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
