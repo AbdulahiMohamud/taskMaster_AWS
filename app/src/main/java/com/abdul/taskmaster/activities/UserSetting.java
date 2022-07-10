@@ -10,6 +10,8 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -19,6 +21,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -27,6 +30,8 @@ import com.amplifyframework.api.graphql.model.ModelQuery;
 import com.amplifyframework.core.Amplify;
 import com.amplifyframework.datastore.generated.model.Team;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -49,6 +54,8 @@ public class UserSetting extends AppCompatActivity {
     ArrayList<String> teamName = new ArrayList<>();
     ArrayList<Team> team = new ArrayList<>();
     ActivityResultLauncher<Intent> activityResultLauncher;
+
+    ByteArrayOutputStream byteArrayOutputStream;
 
 
     @Override
@@ -83,6 +90,7 @@ public class UserSetting extends AppCompatActivity {
 
     public ActivityResultLauncher<Intent> getImagePickingActivityResultLauncher()
     {
+        ImageView userImage = findViewById(R.id.userImageView);
         ActivityResultLauncher<Intent> imagePickingActivityResultLauncher =
                 registerForActivityResult(
                         new ActivityResultContracts.StartActivityForResult(),
@@ -93,6 +101,8 @@ public class UserSetting extends AppCompatActivity {
                                 try {
                                     InputStream pickedImageInputstream = getContentResolver().openInputStream(pickedImageUri);
                                     String pickedImageFileName = getFileNameFromUri(pickedImageUri);
+                                    Bitmap bitmap = BitmapFactory.decodeStream(pickedImageInputstream);
+                                    userImage.setImageBitmap(bitmap);
 
                                     Log.i(TAG, "Succeeded in getting input stream from a file on our phone");
                                 } catch (FileNotFoundException fnfe)
@@ -129,6 +139,27 @@ public class UserSetting extends AppCompatActivity {
         return result;
     }
 
+    public void uploadImage(InputStream data, String fileName)
+    {
+
+        Amplify.Storage.uploadInputStream(
+                fileName,
+                data,
+                good -> Log.i(TAG,"S# uploaded file" + good.getKey()),
+                bad -> Log.e(TAG,"failed to upload to S3" + bad.getMessage())
+        );
+
+
+
+    }
+
+    public void setUpUserImage()
+    {
+        ImageView userImage = findViewById(R.id.userImageView);
+    }
+
+
+
 
     public void saveAndSetUsernameandTeam(){
         // create the shared preferrence instant for username
@@ -149,6 +180,8 @@ public class UserSetting extends AppCompatActivity {
             teamSpinner.setSelected(false);
 
         }
+
+//        uploadImage();
 
 
     }
