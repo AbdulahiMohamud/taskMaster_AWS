@@ -37,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
     public static final String TASK_CREATION = "task date";
     public static final String TAG = "MainActivity";
     public static final String TASK_ID = "task Id";
+    public static final String TASK_IMAGE_TAG = "IMAGE";
 
     SharedPreferences preferences;
 
