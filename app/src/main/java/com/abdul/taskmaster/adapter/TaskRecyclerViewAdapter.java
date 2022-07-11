@@ -56,6 +56,7 @@ public class TaskRecyclerViewAdapter extends RecyclerView.Adapter<TaskRecyclerVi
             goToTaskDetails.putExtra(MainActivity.TASK_DESCRIPTION,taskList.getDescription());
             goToTaskDetails.putExtra(MainActivity.TASK_STATUS,taskList.getState().toString());
             goToTaskDetails.putExtra(MainActivity.TASK_ID,taskList.getId());
+            goToTaskDetails.putExtra(MainActivity.TASK_IMAGE_TAG,taskList.getTaskImageS3Key());
 
 
             callingActivity.startActivity(goToTaskDetails);
