@@ -94,7 +94,6 @@ public class AddTask extends AppCompatActivity {
 
     public ActivityResultLauncher<Intent> getImagePickingActivityResultLauncher()
     {
-        ImageView taskImageView = findViewById(R.id.taskImageView);
         ActivityResultLauncher<Intent> imagePickingActivityResultLauncher =
                 registerForActivityResult(
                         new ActivityResultContracts.StartActivityForResult(),
@@ -110,11 +109,10 @@ public class AddTask extends AppCompatActivity {
                                         {
                                             InputStream pickedImageInputStream = getContentResolver().openInputStream(pickedImageFileUri);
                                        String pickedImageFilename = getFileNameFromUri(pickedImageFileUri);
-                                       Bitmap bitmap = BitmapFactory.decodeStream(pickedImageInputStream);
-                                           taskImageView.setImageBitmap(bitmap);
+
                                             Log.i(TAG, "Succeeded in getting input stream from file on phone! Filename is: " + pickedImageFilename);
                                             // Part 3: Use our InputStream to upload file to S3
-                                            uploadInputStreamToS3(pickedImageInputStream,pickedImageFilename);
+                                            uploadInputStreamToS3(pickedImageInputStream,pickedImageFilename,pickedImageFileUri);
                                         } catch (FileNotFoundException fnfe)
                                         {
                                             Log.e(TAG, "Could not get file from file picker! " + fnfe.getMessage(), fnfe);
@@ -157,7 +155,7 @@ public class AddTask extends AppCompatActivity {
         return result;
     }
 
-    private void uploadInputStreamToS3 (InputStream inputStream, String filename)
+    private void uploadInputStreamToS3 (InputStream inputStream, String filename, Uri uri)
     {
         Amplify.Storage.uploadInputStream(
                 filename,
@@ -166,8 +164,17 @@ public class AddTask extends AppCompatActivity {
                 {
                     imageS3Key = success.getKey();
                     setUpAddButton();
+                    ImageView taskImageView = findViewById(R.id.taskImageView);
 
                     Log.i(TAG,"Succeeding in getting file uploaded to S3. key is: " + success.getKey());
+                    InputStream copyInputStream = null;
+                    try {
+                        copyInputStream = getContentResolver().openInputStream(uri);
+                    } catch (FileNotFoundException fnfe)
+                    {
+                        Log.e(TAG, "Could not get file from Uri. " + fnfe.getMessage(), fnfe);
+                    }
+                    taskImageView.setImageBitmap(BitmapFactory.decodeStream(copyInputStream));
 
                 },
                 failure ->
