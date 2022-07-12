@@ -7,6 +7,8 @@ subscription OnCreateTaskModel {
     dateCreated
     state
     taskImageS3Key
+    latitude
+    longitude
     teamId
     team {
       id
@@ -29,6 +31,8 @@ subscription OnUpdateTaskModel {
     dateCreated
     state
     taskImageS3Key
+    latitude
+    longitude
     teamId
     team {
       id
@@ -51,6 +55,8 @@ subscription OnDeleteTaskModel {
     dateCreated
     state
     taskImageS3Key
+    latitude
+    longitude
     teamId
     team {
       id
@@ -77,6 +83,8 @@ subscription OnCreateTeam {
         dateCreated
         state
         taskImageS3Key
+        latitude
+        longitude
         teamId
         createdAt
         updatedAt
@@ -99,6 +107,8 @@ subscription OnUpdateTeam {
         dateCreated
         state
         taskImageS3Key
+        latitude
+        longitude
         teamId
         createdAt
         updatedAt
@@ -121,6 +131,8 @@ subscription OnDeleteTeam {
         dateCreated
         state
         taskImageS3Key
+        latitude
+        longitude
         teamId
         createdAt
         updatedAt

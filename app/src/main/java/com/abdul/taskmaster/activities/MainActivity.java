@@ -38,6 +38,8 @@ public class MainActivity extends AppCompatActivity {
     public static final String TAG = "MainActivity";
     public static final String TASK_ID = "task Id";
     public static final String TASK_IMAGE_TAG = "IMAGE";
+    public static final String TASK_LAT_TAG = "LATITUDE";
+    public static final String TASK_LONG_TAG = "LONGITUDE";
 
     SharedPreferences preferences;
 
@@ -53,9 +55,11 @@ public class MainActivity extends AppCompatActivity {
         // initialize shared preference
         preferences = PreferenceManager.getDefaultSharedPreferences(this);
 
+        teamTaskList();
         // reroutes to other activities
         goToAddTaskBtn();
         goToAllTaskBtn();
+
         goToUSerSettingBtn();
 
         setLoginBtn();
@@ -72,7 +76,6 @@ public class MainActivity extends AppCompatActivity {
 //        createUser();
 //        verifyUser();
 
-
     }
 
     @Override
@@ -82,7 +85,6 @@ public class MainActivity extends AppCompatActivity {
 //        updateUsername();
 
         fetchUserName();
-        teamTaskList();
         setLoginBtn();
         setLogoutBtn();
 

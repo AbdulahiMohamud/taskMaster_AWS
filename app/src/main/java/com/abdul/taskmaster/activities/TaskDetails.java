@@ -167,4 +167,26 @@ public class TaskDetails extends AppCompatActivity {
     }
 
 
+    private void latAndLong()
+    {
+        Intent callingIntent = getIntent();
+        String currLat = null;
+        String currLong = null;
+        if(callingIntent != null)
+        {
+          currLat = callingIntent.getStringExtra(MainActivity.TASK_LAT_TAG);
+          currLong = callingIntent.getStringExtra(MainActivity.TASK_LONG_TAG);
+
+        }
+        TextView strLat = findViewById(R.id.latTextView);
+        TextView strLong = findViewById(R.id.LongTextView);
+
+        if (currLong != null && currLat != null)
+        {
+            strLat.setText(currLat);
+            strLong.setText(currLong);
+        }
+    }
+
+
 }
