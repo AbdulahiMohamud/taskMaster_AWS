@@ -57,6 +57,9 @@ public class TaskRecyclerViewAdapter extends RecyclerView.Adapter<TaskRecyclerVi
             goToTaskDetails.putExtra(MainActivity.TASK_STATUS,taskList.getState().toString());
             goToTaskDetails.putExtra(MainActivity.TASK_ID,taskList.getId());
             goToTaskDetails.putExtra(MainActivity.TASK_IMAGE_TAG,taskList.getTaskImageS3Key());
+            goToTaskDetails.putExtra(MainActivity.TASK_LAT_TAG,taskList.getLatitude());
+            goToTaskDetails.putExtra(MainActivity.TASK_LONG_TAG,taskList.getLongitude());
+
 
 
             callingActivity.startActivity(goToTaskDetails);
