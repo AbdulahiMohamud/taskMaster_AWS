@@ -3,33 +3,18 @@
     "taskmasteraws": {
       "service": "AppSync",
       "providerPlugin": "awscloudformation",
-      "dependsOn": [
-        {
-          "category": "auth",
-          "resourceName": "taskmasteraws07d25728",
-          "attributes": [
-            "UserPoolId"
-          ]
-        }
-      ],
+      "dependsOn": [],
       "output": {
         "authConfig": {
           "defaultAuthentication": {
-            "authenticationType": "AMAZON_COGNITO_USER_POOLS",
-            "userPoolConfig": {
-              "userPoolId": "authtaskmasteraws07d25728"
+            "authenticationType": "API_KEY",
+            "apiKeyConfig": {
+              "apiKeyExpirationDays": 200,
+              "apiKeyExpirationDate": "2023-01-29T22:43:21.125Z",
+              "description": "apiKey"
             }
           },
-          "additionalAuthenticationProviders": [
-            {
-              "authenticationType": "API_KEY",
-              "apiKeyConfig": {
-                "apiKeyExpirationDays": 5,
-                "apiKeyExpirationDate": "2022-07-17T20:57:25.727Z",
-                "description": "iam"
-              }
-            }
-          ]
+          "additionalAuthenticationProviders": []
         }
       }
     }
