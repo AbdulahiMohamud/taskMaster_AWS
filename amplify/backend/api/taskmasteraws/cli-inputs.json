@@ -5,17 +5,16 @@
     "serviceName": "AppSync",
     "gqlSchemaPath": "/Users/ballout/401/taskMaster_AWS/amplify/backend/api/taskmasteraws/schema.graphql",
     "defaultAuthType": {
-      "mode": "AMAZON_COGNITO_USER_POOLS",
-      "cognitoUserPoolId": "authtaskmasteraws07d25728"
+      "mode": "API_KEY",
+      "expirationTime": 200,
+      "apiKeyExpirationDate": "2023-01-29T22:43:21.125Z",
+      "keyDescription": "apiKey"
     },
-    "conflictResolution": {},
-    "additionalAuthTypes": [
-      {
-        "mode": "API_KEY",
-        "expirationTime": 5,
-        "apiKeyExpirationDate": "2022-07-17T20:57:25.727Z",
-        "keyDescription": "iam"
+    "conflictResolution": {
+      "defaultResolutionStrategy": {
+        "type": "AUTOMERGE"
       }
-    ]
+    },
+    "additionalAuthTypes": []
   }
 }
